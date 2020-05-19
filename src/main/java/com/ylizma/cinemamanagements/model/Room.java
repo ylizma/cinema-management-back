@@ -23,6 +23,6 @@ public class Room {
     private Cinema cinema;
     @OneToMany(mappedBy = "room")
     private Collection<Seat> seats;
-    @OneToMany(mappedBy = "rooms")
+    @OneToMany(mappedBy = "room")
     private Collection<Projection> projections;
 }

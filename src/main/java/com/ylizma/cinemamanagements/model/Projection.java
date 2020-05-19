@@ -20,7 +20,7 @@ public class Projection {
     private Date projection_date;
     private double price;
     @ManyToOne
-    private Room rooms;
+    private Room room;
     @ManyToOne
     private Movie movie;
     @OneToMany(mappedBy = "projection")

@@ -16,9 +16,6 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private double longitude;
-    private double latitude;
-    private double altitude;
     @OneToMany(mappedBy = "city")
     private Collection<Cinema> cinemas;
 }
