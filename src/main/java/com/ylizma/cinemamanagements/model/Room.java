@@ -24,5 +24,6 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private Collection<Seat> seats;
     @OneToMany(mappedBy = "room")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Projection> projections;
 }

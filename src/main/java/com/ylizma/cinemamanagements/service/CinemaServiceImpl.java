@@ -121,6 +121,7 @@ public class CinemaServiceImpl implements CinemaService {
                     movie.setTime(new Random().nextDouble() + 1.0);
                     movie.setReleaseDate(new Date());
                     movie.setCategory(categoryRepository.findAll().get(new Random().nextInt(categoryRepository.findAll().size())));
+                    movie.setImage(movie.getTitle()+"jpg");
                     movieRepository.save(movie);
                 });
     }
