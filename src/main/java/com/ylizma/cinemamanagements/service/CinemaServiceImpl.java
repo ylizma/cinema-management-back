@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -89,12 +90,13 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public void initSeances() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("h:mm");
         Stream.of("12:00", "14:00", "16:00", "18:00", "20:00")
                 .forEach(s -> {
                     Seance seance = new Seance();
                     try {
                         seance.setStartHour(dateFormat.parse(s));
+                        System.out.println(dateFormat.parse(s));
                         seanceRepository.save(seance);
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -128,10 +130,12 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public void initProjections() {
+        List<Movie> movies = movieRepository.findAll();
         cityRepository.findAll().forEach(city -> {
             city.getCinemas().forEach(cinema -> {
                 cinema.getRooms().forEach(room -> {
-                    movieRepository.findAll().forEach(movie -> {
+                    int index = new Random().nextInt(movies.size());
+                    Movie movie = movies.get(index);
                         seanceRepository.findAll().forEach(seance -> {
                             Projection projection = new Projection();
                             projection.setMovie(movie);
@@ -140,7 +144,6 @@ public class CinemaServiceImpl implements CinemaService {
                             projection.setRoom(room);
                             projectionRepository.save(projection);
                         });
-                    });
                 });
             });
         });

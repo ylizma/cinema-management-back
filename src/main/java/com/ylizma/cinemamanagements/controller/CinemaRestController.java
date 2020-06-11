@@ -36,6 +36,7 @@ public class CinemaRestController {
     }
     @PostMapping("/payTicket")
     @Transactional
+    @CrossOrigin("*")
     public List<Ticket> payedTickets(@RequestBody TicketForm ticketForm){
         ticketForm.getTickets().forEach(id ->{
             Ticket ticket = ticketRepository.findById(id).get();
