@@ -116,14 +116,14 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public void initMovies() {
-        Stream.of("Exam", "Inception", "Iron Man", "Joker")
+        Stream.of("Exam", "Inception","Joker")
                 .forEach(mov -> {
                     Movie movie = new Movie();
                     movie.setTitle(mov);
                     movie.setTime(new Random().nextDouble() + 1.0);
                     movie.setReleaseDate(new Date());
                     movie.setCategory(categoryRepository.findAll().get(new Random().nextInt(categoryRepository.findAll().size())));
-                    movie.setImage(movie.getTitle()+"jpg");
+                    movie.setImage(movie.getTitle()+".jpg");
                     movieRepository.save(movie);
                 });
     }
